@@ -1,0 +1,37 @@
+# ArgoCD uses secrets to configure which clusters are available to it.
+# It's ok that this is here because it doesn't contain any credentials
+apiVersion: v1
+stringData:
+  config: '{"tlsClientConfig":{"insecure":false}}'
+  name: cluster-1
+  server: https://kubernetes.xyz
+kind: Secret
+metadata:
+  annotations:
+    managed-by: argocd.argoproj.io
+  labels:
+    app.kubernetes.io/part-of: argo-cd
+    argocd.argoproj.io/secret-type: cluster
+#    env: env-1
+  name: cluster-1
+  namespace: argocd
+type: Opaque
+---
+# ArgoCD uses secrets to configure which clusters are available to it.
+# It's ok that this is here because it doesn't contain any credentials
+apiVersion: v1
+stringData:
+  config: '{"tlsClientConfig":{"insecure":false}}'
+  name: cluster-2
+  server: https://kubernetes.xyz.com
+kind: Secret
+metadata:
+  annotations:
+    managed-by: argocd.argoproj.io
+  labels:
+    app.kubernetes.io/part-of: argo-cd
+    argocd.argoproj.io/secret-type: cluster
+#    cluster-group: group-1
+  name: cluster-2
+  namespace: argocd
+type: Opaque
